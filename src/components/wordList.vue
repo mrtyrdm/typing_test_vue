@@ -15,7 +15,7 @@
         <div  class="w-1/2 flex justify-end font-semibold overflow-hidden">
         <span  class="pr-2" v-for="(textlist ,index) in text" :key="index" :class="(textlist.status) ? 'text-green-600' : 'text-red-600' "  :data-id="index">{{textlist.string}}</span>
           <div style="float: right;">
-            <div class="text-blue-600 text-right whitespace-nowrap flex border-0 w-[5px] font-semibold" 
+            <div class="text-blue-600 text-right whitespace-nowrap block border-0 w-[5px] font-semibold" 
             
             @keydown.space.prevent="inputModel" 
             @keydown.enter.prevent="inputModel"   
