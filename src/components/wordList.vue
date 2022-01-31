@@ -1,41 +1,39 @@
 <template>
-
-      <div class="container  mx-auto py-14" >
-          
-        <div class="flex mx-64 mb-4">
-          <div class="flex justify-start w-full">
-          <div class="bg-white border-4	border-orange-500	 rounded-full drop-shadow-2xl p-4 text-3xl font-black flex items-center justify-center  w-24 h-24">{{time}}</div>
-          </div>
-          <div class="flex justify-end">
-              <div class="bg-white border-4	border-green-500 mr-2	 rounded-lg drop-shadow-2xl p-4 text-3xl font-black flex items-center justify-center  w-24 h-24">{{point.correct.length}}</div>
-              <div class="bg-white border-4	border-red-500	 rounded-lg drop-shadow-2xl p-4 text-3xl font-black flex items-center justify-center  w-24 h-24">{{point.wrong.length}}</div>
-
-          </div>
+    <div class="container  mx-auto py-14" > 
+      <div class="flex mx-64 mb-4">
+        <div class="flex justify-start w-full">
+        <div class="bg-white border-4	border-orange-500	 rounded-full drop-shadow-2xl p-4 text-3xl font-black flex items-center justify-center  w-24 h-24">{{time}}</div>
         </div>
-      <div @click="startFocus" class="flex mx-64 bg-white rounded-lg drop-shadow-2xl" style="font-weight: 100; font-size: 2rem; position: relative; line-height: 4.375; display: flex;">
-        <div  class="w-1/2 flex justify-end font-bold" style="overflow: hidden;">
+        <div class="flex justify-end">
+            <div class="bg-white border-4	border-green-500 mr-2	 rounded-lg drop-shadow-2xl p-4 text-3xl font-black flex items-center justify-center  w-24 h-24">{{point.correct.length}}</div>
+            <div class="bg-white border-4	border-red-500	 rounded-lg drop-shadow-2xl p-4 text-3xl font-black flex items-center justify-center  w-24 h-24">{{point.wrong.length}}</div>
+
+        </div>
+      </div>
+
+      <div @click="startFocus" class="flex mx-64 bg-white rounded-lg drop-shadow-2xl relative text-4xl flex leading-[4.375]">
+        <div  class="w-1/2 flex justify-end font-semibold overflow-hidden">
         <span  class="pr-2" v-for="(textlist ,index) in text" :key="index" :class="(textlist.status) ? 'text-green-600' : 'text-red-600' "  :data-id="index">{{textlist.string}}</span>
           <div style="float: right;">
-            <div class="text-blue-600" 
+            <div class="text-blue-600 text-right whitespace-nowrap flex border-0 w-[5px] font-semibold" 
             
             @keydown.space.prevent="inputModel" 
             @keydown.enter.prevent="inputModel"   
             @keydown.enter.shift.exact.prevent="false"
+            @keydown.ctrl.exact.prevent="false"
             @input.prevent="getValueInput"
             v-focus 
-  
-            style="text-align: right;white-space: nowrap;display: flex;text-rendering: optimizeLegibility;border: 0 solid #d4d4d7;width: 5px;"  
             tabindex="1" ref="typeBox" :contenteditable="content" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
             </div>
           </div>
         </div>
         
-        <div class="w-1/2 overflow-hidden flex">
+        <div class="w-1/2 overflow-hidden flex font-semibold">
             <span class="pr-2" v-for="(data ,index) in datas" :key="index" :data-id="index">{{(index==0)? textLastArr : data}}</span>
           </div>
       </div>
 
-        <KeyboardVue/>
+      <KeyboardVue/>
     </div>
 </template>
 
@@ -57,7 +55,7 @@
         start : false,
         datas : [],
         text : [],
-        items : 150,
+        items : 200,
         count : 0,
         content:true,
         finish : false,
@@ -97,12 +95,10 @@
           if(arr[num]){
           
             if(arr[num]==this.datas[0]){
-              console.log(arr[num]+'-true-'+this.datas[0]);
               this.text.push({string:arr[num],status:true});
               this.point.correct.push(arr[num]);
             
             }else {
-              console.log(arr[num]+'-false-'+this.datas[0]);
               this.text.push({string:arr[num],status:false});
               this.point.wrong.push(arr[num]);
             }
@@ -226,12 +222,10 @@
     mounted(){
       this.SetData();
       eventBus.$on('count',(value)=> {
-          console.log(value);
           this.count = value;
       });
 
       eventBus.$on('playAgain',(value)=> {
-          console.log(value);
           this.playAgain = value;
       });
 

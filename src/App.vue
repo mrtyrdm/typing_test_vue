@@ -18,3 +18,9 @@
     }
   }
 </script>
+
+<style>
+  body {
+        background: #8b9cb4;
+  }
+</style>

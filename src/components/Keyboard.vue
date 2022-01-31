@@ -1,9 +1,9 @@
 <template>
-    <div class="bg-red-700 mx-64 my-8 rounded-lg p-4 drop-shadow-2xl">
-        <div class="row " v-for="test in newkeys" :key="test.index">
-        <div class="flex justify-center" v-for="test2 in test" :key="test2.index">
-            <div v-for="test3 in test2" :key="test3.index">
-                <button  class="p-4 bgcolor text-white m-2 w-16 rounded	h-16" :class="[(keyValue==test3)? 'test' : '']"  :value="keys">{{encode_utf8(test3)}}</button>
+    <div  class="keyboard mx-64 my-8 rounded-lg p-4 drop-shadow-2xl">
+        <div class="row " v-for="keysList in newkeys" :key="keysList.index">
+        <div class="flex justify-center" v-for="keysList2 in keysList" :key="keysList2.index">
+            <div v-for="keysList3 in keysList2" :key="keysList3.index">
+                <div  class="p-4 bgcolor text-white m-2 w-16 rounded-lg	h-16 " :class="[(keyValue==keysList3)? 'animated' : '']"  :value="keys">{{encode_utf8(keysList3)}}</div>
             </div>
         </div>
         </div>
@@ -93,31 +93,29 @@
 
 
 <style scoped>
+.keyboard { 
+    background: linear-gradient( 0deg , rgba(76,82,101,1) 0%, rgba(90,95,110,1) 100%); 
+    box-shadow: inset -1px -1px 16px 17px rgb(0 0 0 / 5%); 
+    border-bottom: 7px solid #0c0f178f; 
+}
 .bgcolor {
-
-    background: red;
-
+    background: rgb(62,66,81);
+    box-shadow: inset -1px -1px 16px 17px rgb(0 0 0 / 5%);
     font-weight: bold;
-
     border-style: solid;
-    border-top-width: 1px;
-    border-bottom-width: 10px;
-    border-left-width: 4px;
-    border-right-width: 4px;
-    border-color: rebeccapurple;
+    border-bottom-width: 5px;
+    border-color: #1a1c26;
 }
 
-.test {
-   animation-duration: 2s;
-     animation-name: example;
+.animated {
+    animation-duration: 1.5s;
+    animation-name: example;
+    
+    
 }
 
 @keyframes example {
   0% {border: 0;}
-  100%   {    border-top-width: 1px;
-    border-bottom-width: 10px;
-    border-left-width: 4px;
-    border-right-width: 4px;}
-
+  100%   {border: 0;}
 }
 </style>
