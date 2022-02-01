@@ -15,7 +15,7 @@
         <div  class="w-1/2 flex justify-end font-semibold overflow-hidden">
         <span  class="pr-2" v-for="(textlist ,index) in text" :key="index" :class="(textlist.status) ? 'text-green-600' : 'text-red-600' "  :data-id="index">{{textlist.string}}</span>
           <div style="float: right;">
-            <div class="text-blue-600 text-right whitespace-nowrap block border-0 w-[5px] font-semibold" 
+            <p class="text-blue-600 text-right whitespace-nowrap block border-0 w-[5px] font-semibold" 
             
             @keydown.space.prevent="inputModel" 
             @keydown.enter.prevent="inputModel"   
@@ -24,7 +24,7 @@
             @input.prevent="getValueInput"
             v-focus 
             tabindex="1" ref="typeBox" :contenteditable="content" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-            </div>
+            </p>
           </div>
         </div>
         
@@ -89,7 +89,8 @@
       inputModel : function(e){
       
         if(this.time>0){
-              const arr =  e.target.innerHTML.split('&nbsp;');
+          var firstarr = e.target.innerHTML.split('<br>');
+          const arr =  firstarr[0].split('&nbsp;');
           var say = arr.length;
           const num = say-1;
           if(arr[num]){
@@ -121,9 +122,9 @@
       
       },
       getValueInput : function(e){
-    
-        var arr = e.target.innerHTML.split('&nbsp;');
-        this.control = arr[arr.length-1];
+        
+        var arr = e.target.innerHTML.split('<br>');
+        this.control = arr[0];
         
       },
       timeDown : function(){
@@ -229,7 +230,6 @@
           this.playAgain = value;
       });
 
-     
     }
   }
 </script>
